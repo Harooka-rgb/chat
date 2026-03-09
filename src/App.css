@@ -1,0 +1,30 @@
+.app {
+  min-height: 100vh;
+  background: #141414;
+  color: white;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: #001529;
+  border-bottom: 1px solid #1890ff;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(45deg, #1890ff, #52c41a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
