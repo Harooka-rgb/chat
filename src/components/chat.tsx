@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react"
 import { supabase } from "../service/supabase"
 import { Button, Card, Empty, Input, List, Typography } from "antd"
-import { MessageCircle, SendHorizonal } from "lucide-react"
+import { MessageCircle, SendHorizonal, Delete } from "lucide-react"
 
-const { Title, Text } = Typography
+const { Text } = Typography
 
 type Message = {
   id: number
@@ -61,6 +61,17 @@ export default function Chat() {
     setText("")
     await loadMessages()
     setLoading(false)
+  }
+
+  async function deleteMessage(id: number) {
+    const { error } = await supabase.from("messages").delete().eq("id", id)
+
+    if (error) {
+      console.error("Ошибка удаления сообщения:", error.message)
+      return
+    }
+
+    await loadMessages()
   }
 
   function scrollToBottom() {
@@ -154,7 +165,10 @@ export default function Chat() {
               dataSource={messages}
               split={false}
               renderItem={(message) => (
-                <List.Item style={{ padding: "8px 0", border: "none" }}>
+                <List.Item 
+                  style={{ padding: "8px 0", border: "none" }}
+                  actions={[<Button type="text" icon={<Delete size={16} />} onClick={() => deleteMessage(message.id)} danger />]}
+                >
                   <div
                     style={{
                       maxWidth: "80%",
